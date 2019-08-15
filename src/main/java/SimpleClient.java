@@ -28,7 +28,6 @@ public class SimpleClient implements Client{
     public void sendMessage() {
         try (final DataOutputStream out = new DataOutputStream(socket.getOutputStream())){
             out.writeInt(1);
-            out.close();
         } catch (final Exception e) {
             LOG.info("Error while sending message", e);
         }

@@ -57,7 +57,6 @@ public class CounterServer implements ConsistentServer{
             try (final Socket leftSocket =  new Socket(IP, port)){
                 try (final DataOutputStream out = new DataOutputStream(leftSocket.getOutputStream())){
                     out.writeInt(count);
-                    out.close();
                 };
             } catch (final IOException e) {
                 LOG.error("Error while sending msg from server", e);
@@ -84,7 +83,6 @@ public class CounterServer implements ConsistentServer{
                     sendMessageWithCurrentCount(leftIP, rightCur);
                 }
 
-                in.close();
                 clientSocket.close();
 
             } catch (final Exception e) {
