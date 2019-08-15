@@ -13,7 +13,7 @@ public class Main {
         if (args.length == 2) {
             start(args[0], args[1]);
         } else if (args.length == 3){
-            start(Integer.parseInt(args[0]), args[1], args[3]);
+            start(Integer.parseInt(args[0]), args[1], args[2]);
         } else {
             LOG.error("Arguments must be set like: left_port right_port config");
         }
