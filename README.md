@@ -14,12 +14,12 @@ Algorithm :
     
     5. When a server gets a message from left:
     
-        5.1 Server compares left_count from getting_count(count from message).
+        5.1. Server compares left_count from getting_count(count from message).
         
-        5.2 If getting_count > left_count than left_count = getting_count.
+        5.2. If getting_count > left_count than left_count = getting_count.
             This way server understands that there are more left hosts.
             
-        5.3 Server sends getting_count right down the chain.
+        5.3. Server sends left_count increasing by 1 right down the chain.
         
     6. When a server gets a message from right it compares etc.
     
