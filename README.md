@@ -19,7 +19,7 @@ Algorithm :
         5.2 If getting_count > left_count than left_count = getting_count.
             This way server understands that there are more left hosts.
             
-        5.3 Server sends left_count right down the chain increasing by 1.
+        5.3 Server sends left_count increasing by 1 right down the chain.
         
     6. When a server gets a message from right it compares etc.
     
