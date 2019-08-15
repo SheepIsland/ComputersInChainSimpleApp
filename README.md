@@ -1,5 +1,5 @@
 # ComputersInChainSimpleApp
-Simple Application coining computers in chain 
+Simple Application counting computers in chain 
 
 Algorithm :
 
