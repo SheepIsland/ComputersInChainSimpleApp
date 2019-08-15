@@ -73,6 +73,9 @@ public class CounterServer implements ConsistentServer{
                 if (clientSocket.getInetAddress().getHostAddress().equals(leftIP)) {
                     if (input == leftCout) {
                         leftCounting = false;
+                        if (rightCount == 0) {
+                            rightCounting = false;
+                        }
                         return;
                     }
                     if (input > leftCout) {
@@ -81,8 +84,11 @@ public class CounterServer implements ConsistentServer{
                     final int leftCur = leftCout + 1;
                     sendMessageWithCurrentCount(rightIP, leftCur);
                 } else {
-                    if (input == rightCounting) {
+                    if (input == rightCount) {
                         rightCounting = false;
+                        if (leftCout == 0) {
+                            leftCounting = false;
+                        }
                         return;
                     }
                     if (input > rightCount) {
