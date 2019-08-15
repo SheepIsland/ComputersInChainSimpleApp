@@ -8,7 +8,8 @@ import java.io.*;
 public class CounterServer implements ConsistentServer{
     private static final Logger LOG = LoggerFactory.getLogger(CounterServer.class);
 
-    private static boolean counting = true;
+    private static boolean leftCounting = true;
+    private static boolean rightCounting = true;
     private static int leftCout = 0;
     private static int rightCount = 0;
 
@@ -18,7 +19,7 @@ public class CounterServer implements ConsistentServer{
     public void start(final int port, final String leftIP, final String rightIP) {
         try {
             serverSocket = new ServerSocket(port);
-            while (counting) {
+            while (leftCounting || rightCounting) {
                 new ClientHandler(serverSocket.accept(), port, leftIP, rightIP).start();
                 LOG.info("Current count: {}", leftCout + rightCount + 1);
             }
@@ -69,18 +70,21 @@ public class CounterServer implements ConsistentServer{
 
                 final int input = in.readInt();
 
-                if (leftCout + rightCount == input) {
-                    counting = false;
-                    return;
-                }
-
                 if (clientSocket.getInetAddress().getHostAddress().equals(leftIP)) {
+                    if (input == leftCout) {
+                        leftCounting = false;
+                        return;
+                    }
                     if (input > leftCout) {
                         leftCout = input;
                     }
                     final int leftCur = leftCout + 1;
                     sendMessageWithCurrentCount(rightIP, leftCur);
                 } else {
+                    if (input == rightCounting) {
+                        rightCounting = false;
+                        return;
+                    }
                     if (input > rightCount) {
                         rightCount = input;
                     }
