@@ -19,7 +19,7 @@ public class CounterServer implements ConsistentServer{
         try {
             serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(TIMEOUT);
-            while (true) {
+            while (!serverSocket.isClosed()) {
                 new ClientHandler(serverSocket.accept(), port, leftIP, rightIP).start();
                 serverSocket.setSoTimeout(TIMEOUT);
                 LOG.info("Current count: {}", leftCout + rightCount + 1);
