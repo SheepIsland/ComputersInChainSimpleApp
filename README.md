@@ -25,6 +25,6 @@ Algorithm :
     
     7. Hosts exchange messages such way until their left_count, right_count becomes equal to received counts.
     
-    8. Total number computers in chain will be (left_count + right_count + 1).
+    8. Total number of computers in chain will be (left_count + right_count + 1).
    
     
