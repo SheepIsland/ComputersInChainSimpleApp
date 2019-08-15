@@ -7,7 +7,7 @@ Algorithm :
     
     2. Initially left_count = 0, right_count = 0
     
-    3. Client send 1 to left and right hosts.
+    3. Client sends 1 to left and right hosts.
        This way hosts learn about each other.
        
     3. Each server is waiting for a message from left,right. 
