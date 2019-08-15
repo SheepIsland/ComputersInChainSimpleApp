@@ -23,7 +23,7 @@ Algorithm :
         
     6. When a server gets a message from right it compares etc.
     
-    7. Hosts exchange messages such way until their left_count, right_count becomes equal to received counts.
+    7. Servers are closed by timeout when they will no longer recieve messages.
     
     8. Total number of computers in chain will be (left_count + right_count + 1).
    
