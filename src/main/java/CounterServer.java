@@ -66,9 +66,7 @@ public class CounterServer implements ConsistentServer{
         @Override
         public void run() {
             try(final DataInputStream in = new DataInputStream(clientSocket.getInputStream())) {
-
                 final int input = in.readInt();
-
                 if (clientSocket.getInetAddress().getHostAddress().equals(leftIP)) {
                     if (input > leftCout) {
                         leftCout = input;
@@ -82,9 +80,7 @@ public class CounterServer implements ConsistentServer{
                     final int rightCur = rightCount + 1;
                     sendMessageWithCurrentCount(leftIP, rightCur);
                 }
-
                 clientSocket.close();
-
             } catch (final Exception e) {
                 LOG.debug(e.getMessage());
             }
