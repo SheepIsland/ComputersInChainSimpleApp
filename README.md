@@ -1,11 +1,11 @@
 # ComputersInChainSimpleApp
-Simple Application coining computers in chain 
+Simple Application counting computers in chain 
 
 Algorithm :
 
     1. There are local vars for counting left, right hosts.
     
-    2. Initially left_count = 0, right_count = 0
+    2. Initially left_count = 0, right_count = 0.
     
     3. Client sends 1 to left and right hosts.
        This way hosts learn about each other.
@@ -24,5 +24,7 @@ Algorithm :
     6. When a server gets a message from right it compares etc.
     
     7. Hosts exchange messages such way until their left_count, right_count becomes equal to received counts.
+    
+    8. Total number of computers in chain will be (left_count + right_count + 1).
    
     
