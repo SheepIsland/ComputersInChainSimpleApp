@@ -7,9 +7,8 @@ import java.io.*;
 
 public class CounterServer implements ConsistentServer{
     private static final Logger LOG = LoggerFactory.getLogger(CounterServer.class);
+    private static final int TIMEOUT = 500000;
 
-    private static boolean leftCounting = true;
-    private static boolean rightCounting = true;
     private static int leftCout = 0;
     private static int rightCount = 0;
 
@@ -19,8 +18,10 @@ public class CounterServer implements ConsistentServer{
     public void start(final int port, final String leftIP, final String rightIP) {
         try {
             serverSocket = new ServerSocket(port);
-            while (leftCounting || rightCounting) {
+            serverSocket.setSoTimeout(TIMEOUT);
+            while (true) {
                 new ClientHandler(serverSocket.accept(), port, leftIP, rightIP).start();
+                serverSocket.setSoTimeout(TIMEOUT);
                 LOG.info("Current count: {}", leftCout + rightCount + 1);
             }
         } catch (final IOException e) {
@@ -71,26 +72,12 @@ public class CounterServer implements ConsistentServer{
                 final int input = in.readInt();
 
                 if (clientSocket.getInetAddress().getHostAddress().equals(leftIP)) {
-                    if (input == leftCout) {
-                        leftCounting = false;
-                        if (rightCount == 0) {
-                            rightCounting = false;
-                        }
-                        return;
-                    }
                     if (input > leftCout) {
                         leftCout = input;
                     }
                     final int leftCur = leftCout + 1;
                     sendMessageWithCurrentCount(rightIP, leftCur);
                 } else {
-                    if (input == rightCount) {
-                        rightCounting = false;
-                        if (leftCout == 0) {
-                            leftCounting = false;
-                        }
-                        return;
-                    }
                     if (input > rightCount) {
                         rightCount = input;
                     }
