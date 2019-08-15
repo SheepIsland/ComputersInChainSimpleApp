@@ -26,6 +26,6 @@ Algorithm :
     7. Servers are closed by timeout when they will no longer recieve messages.
     
     8. Total number of computers in chain will be (left_count + right_count + 1).
-       Total count of sending message will be 2*(2*number_of_computers - 1).
+       Total count of sending messages will be 2*(2*number_of_computers - 1).
    
     
