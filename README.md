@@ -5,7 +5,7 @@ Algorithm :
 
     1. There are local vars for counting left, right hosts.
     
-    2. Initially left_count = 0, right_count = 0
+    2. Initially left_count = 0, right_count = 0.
     
     3. Client sends 1 to left and right hosts.
        This way hosts learn about each other.
